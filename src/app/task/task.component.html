@@ -1,5 +1,8 @@
 <p>
-  Сделать: {{task.title}}, приоритет: {{task.priority}}
+  Сделать: {{task.title}},<br>
+  описание: {{task.description}}, <br>
+  исполнитель: {{task.executor}}, <br>
+  приоритет: {{task.priority}}<br>
 </p>
 
 <button *ngIf="moveEnabled" (click)="moveAhead()">Вперед</button>

@@ -1,9 +1,7 @@
 <p>
   {{stage.name}}
-  <label title="Название задачи">Задача:
-    <input [(ngModel)]="taskName">
-  </label>
-  <button (click)="createTask()">Создать</button>
+  <br>
+  <app-task-form (create)="createTask($event)"></app-task-form>
 </p>
 
 
