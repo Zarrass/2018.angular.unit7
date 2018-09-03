@@ -1,3 +1,3 @@
-<div *ngFor="let stage of stages; let i=index; let isLast=last;">
+<div class="board-div" *ngFor="let stage of stages; let i=index; let isLast=last;">
   <app-stage [moveEnabled]="!isLast" (moveTask)="onMoveTask($event, i)" [stage]="stage"></app-stage>
 </div>

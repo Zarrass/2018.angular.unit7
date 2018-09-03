@@ -2,12 +2,16 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Task} from '../task';
 
+
+
+
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
+
 
   @Output()
   create: EventEmitter<Task> = new EventEmitter<Task>();

@@ -1,20 +1,31 @@
-<form [formGroup]="taskForm" (submit)="createTask()">
-  <label title="Название">
-    Название:
-    <input formControlName="name">
-  </label>
+<mat-accordion>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Создать новую задачу
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+<form class="taskForm" [formGroup]="taskForm" (submit)="createTask()">
+  <mat-form-field>
+    <input matInput placeholder="Название" formControlName="name" #input maxlength="50" required>
+  </mat-form-field>
   <br>
-  <app-control-error [control]="taskForm.controls.name"></app-control-error>
-  <label title="Описание">
-    Описание:
-    <input formControlName="description">
-  </label>
+    <mat-form-field>
+    <input matInput placeholder="Описание" formControlName="description" #input maxlength="250" required>
+  </mat-form-field>
   <br>
-  <app-control-error [control]="taskForm.controls.description"></app-control-error>
-  <select formControlName="executor">
-    <option *ngFor="let exec of executors" [value]="exec">
+  <mat-form-field>
+    <input matInput type="text"  placeholder="Исполнитель"  [matAutocomplete]="auto">
+  </mat-form-field>
+  <mat-autocomplete #auto ="matAutocomplete">
+    <mat-option *ngFor="let exec of executors" [value]="exec">
       {{exec}}
-    </option>
-  </select>
-  <button type="submit">Создать</button>
+    </mat-option>
+  </mat-autocomplete>
+  <br>
+  <button mat-raised-button color="primary" type="submit">Создать</button>
 </form>
+</mat-expansion-panel>
+</mat-accordion>
