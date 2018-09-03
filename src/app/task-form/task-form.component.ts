@@ -11,7 +11,7 @@ import {Task} from '../task';
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
-
+  panelOpenState = false;
 
   @Output()
   create: EventEmitter<Task> = new EventEmitter<Task>();
@@ -42,10 +42,13 @@ export class TaskFormComponent implements OnInit {
       this.taskForm.reset({
         name: '',
         description: '',
-        executor: 'Павлов М.'
+        executor: 'Павлов М.',
       });
       this.create.emit(task);
-    }
+      }
   }
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState
+}
 
 }

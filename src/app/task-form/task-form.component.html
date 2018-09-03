@@ -1,13 +1,11 @@
-<mat-accordion>
-
-<mat-expansion-panel>
+<mat-expansion-panel [expanded]="panelOpenState">
   <mat-expansion-panel-header>
     <mat-panel-title>
       Создать новую задачу
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-<form class="taskForm" [formGroup]="taskForm" (submit)="createTask()">
+<form class="taskForm" [formGroup]="taskForm" (submit)="createTask(); togglePanel()">
   <mat-form-field>
     <input matInput placeholder="Название" formControlName="name" #input maxlength="50" required>
   </mat-form-field>
@@ -28,4 +26,3 @@
   <button mat-raised-button color="primary" type="submit">Создать</button>
 </form>
 </mat-expansion-panel>
-</mat-accordion>
