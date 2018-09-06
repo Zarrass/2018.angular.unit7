@@ -45,6 +45,7 @@ export class TaskFormComponent implements OnInit {
         executor: 'Павлов М.',
       });
       this.create.emit(task);
+      this.togglePanel();
       }
   }
   togglePanel() {

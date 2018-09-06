@@ -1,11 +1,11 @@
-<mat-expansion-panel [expanded]="panelOpenState">
+<mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true">
   <mat-expansion-panel-header>
     <mat-panel-title>
       Создать новую задачу
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-<form class="taskForm" [formGroup]="taskForm" (submit)="createTask(); togglePanel()">
+<form class="taskForm" [formGroup]="taskForm" (submit)="createTask()">
   <mat-form-field>
     <input matInput placeholder="Название" formControlName="name" #input maxlength="50" required>
   </mat-form-field>
