@@ -1,8 +1,13 @@
-<p>
-  Сделать: {{task.title}},<br>
-  описание: {{task.description}}, <br>
-  исполнитель: {{task.executor}}, <br>
-  приоритет: {{task.priority}}<br>
-</p>
+<mat-card class="task-card">
+  <mat-card-header>
+     <mat-card-title>Название: {{task.title}}</mat-card-title>
+    <mat-card-subtitle>Исполнитель: {{task.executor}}</mat-card-subtitle>
+  </mat-card-header>
 
-<button *ngIf="moveEnabled" (click)="moveAhead()">Вперед</button>
+  <mat-card-content>
+    Описание: {{task.description}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn" *ngIf="moveEnabled" (click)="moveAhead()">Вперед</button>
+   </mat-card-actions>
+</mat-card>
