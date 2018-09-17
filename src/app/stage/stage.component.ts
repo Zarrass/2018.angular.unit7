@@ -5,6 +5,7 @@ import {BackendService} from '../backend.service';
 import {Subject, Subscription} from 'rxjs';
 import {repeatWhen} from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-stage',
   templateUrl: './stage.component.html',
@@ -15,8 +16,10 @@ export class StageComponent implements OnInit, OnDestroy {
   @Input()
   stage: Stage;
 
+
   @Input()
   moveEnabled: boolean;
+
 
   @Output()
   moveTask: EventEmitter<Task> = new EventEmitter<Task>();
@@ -30,10 +33,11 @@ export class StageComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit() {this.getTasksByStageSubscription = this.service
-    .getTasksByStage(this.stage.id)
-    .pipe(repeatWhen(() => this.refreshStage))
-    .subscribe((tasks: Task[]) => this.stage.tasks = tasks);
+  ngOnInit() {
+    this.getTasksByStageSubscription = this.service
+      .getTasksByStage(this.stage.id)
+      .pipe(repeatWhen(() => this.refreshStage))
+      .subscribe((tasks: Task[]) => this.stage.tasks = tasks);
   }
 
   createTask(task: Task) {
@@ -46,9 +50,19 @@ export class StageComponent implements OnInit, OnDestroy {
       });
   }
 
-  onTaskMoved($event: Task) {
-    this.stage.tasks = this.stage.tasks.filter(value => value !== $event);
-    this.moveTask.emit($event);
+  delTask($task: Task) {
+    $task.stageId = this.stage.id;
+    const delTaskSubscription = this.service
+      .deleteTask($task)
+      .subscribe(() => {
+        this.refreshStage.next();
+        delTaskSubscription.unsubscribe()
+      })
+  }
+
+  onTaskMoved($move: Task) {
+    this.stage.tasks = this.stage.tasks.filter(value => value !== $move);
+    this.moveTask.emit($move);
   }
 
   ngOnDestroy(): void {

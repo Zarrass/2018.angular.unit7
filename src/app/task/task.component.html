@@ -1,6 +1,6 @@
-<mat-card class="task-card">
+<mat-card class="task-card" *ngIf="!isEdit">
   <mat-card-header>
-     <mat-card-title>Название: {{task.name}}</mat-card-title>
+    <mat-card-title>Название: {{task.name}}</mat-card-title>
     <mat-card-subtitle>Исполнитель: {{task.executor}}</mat-card-subtitle>
   </mat-card-header>
 
@@ -8,6 +8,40 @@
     Описание: {{task.description}}
   </mat-card-content>
   <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onEditStart()">Редактировать</button>
+    <button mat-raised-button color="primary" (click)="deleteTask()">Удалить</button>
     <button mat-raised-button color="warn" *ngIf="moveEnabled" (click)="moveAhead()">Вперед</button>
-   </mat-card-actions>
+  </mat-card-actions>
 </mat-card>
+
+<mat-card class="task-card" *ngIf="isEdit">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-form-field>Название:
+        <input matInput [(ngModel)]="taskName" #input maxlength="50" required>
+      </mat-form-field>
+    </mat-card-title>
+    <mat-card-subtitle>Исполнитель:
+      <mat-form-field>
+        <input matInput [(ngModel)]="taskExecutor" [matAutocomplete]="auto">
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let exec of executors" [value]="exec">
+            {{exec}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field>Описание:
+      <input matInput [(ngModel)]="taskDescription" #input maxlength="250" required>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onEditFinish()">Сохранить</button>
+    <button mat-raised-button color="accent" (click)="onEditCancel()">Отмена</button>
+  </mat-card-actions>
+</mat-card>
+

@@ -15,5 +15,7 @@
   <app-task
     [moveEnabled]="moveEnabled"
     (moveTask)="onTaskMoved($event)"
-    [task]="task"></app-task>
+    (delTask)="delTask($event)"
+    [task]="task"
+    ></app-task>
 </div>
