@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Task} from '../task';
+import {Task} from '../models/task.service';
 
 
 
@@ -42,7 +42,7 @@ export class TaskFormComponent implements OnInit {
       this.taskForm.reset({
         name: '',
         description: '',
-        executor: 'Павлов М.',
+        executor: 'Павлов М',
       });
       this.create.emit(task);
       this.togglePanel();
