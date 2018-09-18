@@ -23,6 +23,8 @@ export class StageComponent implements OnInit, OnDestroy {
 
   @Output()
   moveTask: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output()
+  delStage: EventEmitter<Stage> = new EventEmitter<Stage>();
   getTasksByStageSubscription: Subscription;
   refreshStage = new Subject();
 
@@ -50,19 +52,13 @@ export class StageComponent implements OnInit, OnDestroy {
       });
   }
 
-  delTask($task: Task) {
-    $task.stageId = this.stage.id;
-    const delTaskSubscription = this.service
-      .deleteTask($task)
-      .subscribe(() => {
-        this.refreshStage.next();
-        delTaskSubscription.unsubscribe()
-      })
+  removeTask(task: Task) {
+    this.refreshStage.next();
   }
 
-  onTaskMoved($move: Task) {
-    this.stage.tasks = this.stage.tasks.filter(value => value !== $move);
-    this.moveTask.emit($move);
+  onTaskMoved(move: Task) {
+    this.stage.tasks = this.stage.tasks.filter(value => value !== move);
+    this.moveTask.emit(move);
   }
 
   ngOnDestroy(): void {
@@ -80,6 +76,25 @@ export class StageComponent implements OnInit, OnDestroy {
     const updateStageSubscription = this.service
       .updateStage(this.stage)
       .subscribe(() => updateStageSubscription.unsubscribe());
+  }
+
+  removeStage() {
+    const removeStageSubscription = this.service
+      .deleteStage(this.stage)
+      .subscribe(() => {
+        this.delStage.emit(this.stage);
+        removeStageSubscription.unsubscribe();
+      })
+  }
+
+  cloneStage() {
+    this.stage.id = this.stage.id + 1;
+    const cloneStageSubscription = this.service
+      .clnStage(this.stage)
+      .subscribe(() => {
+        this.delStage.emit(this.stage);
+        cloneStageSubscription.unsubscribe();
+      })
   }
 
   onEditCancel() {

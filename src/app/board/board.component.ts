@@ -25,6 +25,17 @@ export class BoardComponent implements OnInit, OnDestroy {
       .subscribe((stages: Stage[]) => this.stages = stages);
   }
 
+  deleteStage() {
+    {
+      this.getStagesSubscription = this.service
+        .getStages()
+        .subscribe((stages: Stage[]) => {
+          this.stages = stages;
+          this.getStagesSubscription.unsubscribe()
+        });
+    }
+  }
+
   onMoveTask($event: Task, i: number) {
     this.stages[i + 1].tasks.push($event);
   }

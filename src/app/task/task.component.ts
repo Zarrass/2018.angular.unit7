@@ -4,6 +4,7 @@ import {Task} from '../models/task.service';
 import {BackendService} from "../backend.service";
 import {Subscription} from "rxjs/internal/Subscription";
 
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -19,6 +20,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   @Output()
   moveTask: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output()
   delTask: EventEmitter<Task> = new EventEmitter<Task>();
 
   isEdit = false;
@@ -58,8 +60,16 @@ export class TaskComponent implements OnInit, OnDestroy {
       .subscribe(() => this.updateTaskSubscription.unsubscribe())
   }
 
-  deleteTask() {
-    this.delTask.emit(this.task)
+  deleteTask(task: Task) {
+
+    const delTaskSubscription = this.service
+      .deleteTask(task)
+      .subscribe(() => {
+          this.delTask.emit(this.task);
+          delTaskSubscription.unsubscribe();
+        }
+      );
+
   }
 
   onEditCancel() {

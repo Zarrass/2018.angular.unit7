@@ -36,4 +36,12 @@ export class BackendService {
     return this.http.delete <Task>(this.url + 'tasks/' + task.id);
   }
 
+  deleteStage(stage: Stage): Observable<Stage> {
+    return this.http.delete<Stage>(this.url + 'stages/' + stage.id);
+  }
+
+  clnStage(stage: Stage): Observable<Stage> {
+    return this.http.post<Stage>(this.url + 'stages/', stage)
+  }
+
 }

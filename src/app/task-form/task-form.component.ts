@@ -3,8 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Task} from '../models/task.service';
 
 
-
-
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
@@ -46,10 +44,11 @@ export class TaskFormComponent implements OnInit {
       });
       this.create.emit(task);
       this.togglePanel();
-      }
+    }
   }
+
   togglePanel() {
     this.panelOpenState = !this.panelOpenState
-}
+  }
 
 }

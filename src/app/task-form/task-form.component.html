@@ -5,24 +5,24 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-<form class="taskForm" [formGroup]="taskForm" (submit)="createTask()">
-  <mat-form-field>
-    <input matInput placeholder="Название" formControlName="name" #input maxlength="50" required>
-  </mat-form-field>
-  <br>
+  <form class="taskForm" [formGroup]="taskForm" (submit)="createTask()">
     <mat-form-field>
-    <input matInput placeholder="Описание" formControlName="description" #input maxlength="250" required>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input matInput type="text"  placeholder="Исполнитель"  [matAutocomplete]="auto">
-  </mat-form-field>
-  <mat-autocomplete #auto ="matAutocomplete">
-    <mat-option *ngFor="let exec of executors" [value]="exec">
-      {{exec}}
-    </mat-option>
-  </mat-autocomplete>
-  <br>
-  <button mat-raised-button color="primary" type="submit">Создать</button>
-</form>
+      <input matInput placeholder="Название" formControlName="name" #input maxlength="50" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Описание" formControlName="description" #input maxlength="250" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Исполнитель" [matAutocomplete]="auto">
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let exec of executors" [value]="exec">
+        {{exec}}
+      </mat-option>
+    </mat-autocomplete>
+    <br>
+    <button mat-raised-button color="primary" type="submit">Создать</button>
+  </form>
 </mat-expansion-panel>

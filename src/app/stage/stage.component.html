@@ -2,10 +2,12 @@
   <p>
     {{stage.name}}
   </p>
-  <button mat-raised-button color="primary"(click)="onEditStart()">Редактировать</button>
+  <button mat-raised-button color="primary" (click)="onEditStart()">Редактировать</button>
+  <button mat-raised-button color="warn" (click)="removeStage()">Удалить</button>
+  <button mat-raised-button color="accent" (click)="cloneStage()">Копировать</button>
 </div>
 <div *ngIf="isEdit">
-  <input [(ngModel)]="stageName">
+  <input matInputn [(ngModel)]="stageName">
   <button mat-raised-button color="primary" (click)="onEditFinish()">Сохранить</button>
   <button mat-raised-button color="accent" (click)="onEditCancel()">Отмена</button>
 </div>
@@ -15,7 +17,7 @@
   <app-task
     [moveEnabled]="moveEnabled"
     (moveTask)="onTaskMoved($event)"
-    (delTask)="delTask($event)"
+    (delTask)="removeTask($event)"
     [task]="task"
-    ></app-task>
+  ></app-task>
 </div>
