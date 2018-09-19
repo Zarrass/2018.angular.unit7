@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   stages: Stage[];
 
+
   getStagesSubscription: Subscription;
 
   constructor(private service: BackendService) {
@@ -25,19 +26,25 @@ export class BoardComponent implements OnInit, OnDestroy {
       .subscribe((stages: Stage[]) => this.stages = stages);
   }
 
-  deleteStage() {
+  refreshStage() {
     {
-      this.getStagesSubscription = this.service
+      const refreshStagesSubscription = this.service
         .getStages()
         .subscribe((stages: Stage[]) => {
           this.stages = stages;
-          this.getStagesSubscription.unsubscribe()
+          refreshStagesSubscription.unsubscribe()
         });
     }
   }
 
-  onMoveTask($event: Task, i: number) {
-    this.stages[i + 1].tasks.push($event);
+  onMoveTask(task: Task, i: number) {
+    task.stageId = this.stages[i + 1].id;
+    const updateTaskSubscription = this.service
+      .updateTask(task)
+      .subscribe(() => {
+        this.refreshStage();
+        updateTaskSubscription.unsubscribe()
+      });
   }
 
   ngOnDestroy(): void {

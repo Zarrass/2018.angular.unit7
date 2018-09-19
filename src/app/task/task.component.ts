@@ -1,4 +1,3 @@
-///<reference path="../../../node_modules/rxjs/internal/Observable.d.ts"/>
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Task} from '../models/task.service';
 import {BackendService} from "../backend.service";
