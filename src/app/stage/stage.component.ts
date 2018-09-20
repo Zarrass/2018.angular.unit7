@@ -57,7 +57,6 @@ export class StageComponent implements OnInit, OnDestroy {
   }
 
   onTaskMoved(move: Task) {
-    this.stage.tasks = this.stage.tasks.filter(value => value !== move);
     this.moveTask.emit(move);
   }
 
