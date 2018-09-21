@@ -1,10 +1,23 @@
-<p>
-  {{stage.name}}
-  <br>
-  <app-task-form (create)="createTask($event)"></app-task-form>
-</p>
-
+<div *ngIf="!isEdit">
+  <p>
+    {{stage.name}}
+  </p>
+  <button mat-raised-button color="primary" (click)="onEditStart()">Редактировать</button>
+  <button mat-raised-button color="warn" (click)="removeStage()">Удалить</button>
+  <button mat-raised-button color="accent" (click)="cloneStage()">Копировать</button>
+</div>
+<div *ngIf="isEdit">
+  <input matInputn [(ngModel)]="stageName">
+  <button mat-raised-button color="primary" (click)="onEditFinish()">Сохранить</button>
+  <button mat-raised-button color="accent" (click)="onEditCancel()">Отмена</button>
+</div>
+<app-task-form (create)="createTask($event)"></app-task-form>
 
 <div *ngFor="let task of stage.tasks">
-  <app-task [moveEnabled]="moveEnabled" (moveTask)="onTaskMoved($event)" [task]="task"></app-task>
+  <app-task
+    [moveEnabled]="moveEnabled"
+    (moveTask)="onTaskMoved($event)"
+    (delTask)="removeTask($event)"
+    [task]="task"
+  ></app-task>
 </div>

@@ -8,5 +8,3 @@ export class Stage {
     this.name = name;
   }
 }
-
-export const Stages: Stage[] = [new Stage('План'), new Stage('В работе'), new Stage('Готово')];

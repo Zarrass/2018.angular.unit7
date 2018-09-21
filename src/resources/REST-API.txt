@@ -1,0 +1,131 @@
+Ссылка на проект: https://github.com/Bael/yak2
+Основная рабочая директория: yak2/kanban-server/src/main/java/ru/otus/spring/hw/kanban/
+URL: http://localhost:8080
+
+/// ====== BOARD
+
+Методы для Board (файл /kanban/controllers/BoardController.java):
+1) Получить все доски
+Тип: GET
+Путь: /boards
+Тело запроса: -
+Результат: List<BoardDTO>
+
+2) Создать новую доску
+Тип: POST
+Путь: /boards
+Тело запроса: BoardDTO 
+Результат: BoardDTO
+
+
+3) Получить выбранную доску
+Тип: GET
+Путь: /boards/{id}
+Тело запроса: -
+Результат: BoardDTO
+
+4) Обновить выбранную доску
+Тип: PUT
+Путь: /boards/{id}
+Тело запроса: BoardDTO
+Результат: BoardDTO
+
+5) Удалить выбранную доску
+Тип: DELETE
+Путь: /boards/{id}
+Тело запроса: -
+Результат: -
+
+ДТО (файл /kanban/dto/BoardDTO.java):
+1) BoardDTO
+public String name;
+public int id;
+
+/// ====== STAGE
+
+Методы для Stage (файл /kanban/controllers/BoardController.java):
+1) Получить все стадии
+Тип: GET
+Путь: /stages
+Тело запроса: -
+Результат: List<StageDTO>
+
+2) Создать новую стадию
+Тип: POST
+Путь: /stages
+Тело запроса: StageDTO
+Результат: StageDTO
+
+3) Получить выбранную стадию
+Тип: GET
+Путь: /stages/{id}
+Тело запроса: -
+Результат: StageDTO
+
+4) Обновить выбранную стадию
+Тип: PUT
+Путь: /stages/{id}
+Тело запроса: StageDTO
+Результат: StageDTO
+
+5) Удалить выбранную стадию
+Тип: DELETE
+Путь: /boards/{id}
+Тело запроса: -
+Результат: -
+
+ДТО (файл /kanban/dto/StageDTO.java):
+1) StageDTO
+public int id;
+public String name;
+public String description;
+public int boardId;
+
+/// ====== TASK
+
+Методы для Task (файл /kanban/controllers/TaskController.java):
+
+1) Получить все задачи для стадии
+Тип: GET
+Путь: /stages/{id}/tasks
+Тело запроса: -
+Результат: List<TaskDTO>
+
+2) Получить все задачи
+Тип: GET
+Путь: /tasks
+Тело запроса: -
+Результат: List<TaskDTO>
+
+3) Создать новую задачу
+Тип: POST
+Путь: /tasks
+Тело запроса: TaskDTO
+Результат: TaskDTO
+
+4) Получить выбранную задачу
+Тип: GET
+Путь: /tasks/{id}
+Тело запроса: -
+Результат: TaskDTO 
+
+5) Обновить выбранную задачу
+Тип: PUT
+Путь: /tasks/{id}
+Тело запроса: TaskDTO
+Результат: TaskDTO
+
+6) Удалить выбранную задачу
+Тип: DELETE
+Путь: /tasks/{id}
+Тело запроса: -
+Результат: -
+
+ДТО (файл /kanban/dto/TaskDTO.java):
+1) TaskDTO
+public int id;
+public String name;
+public String description;
+public String executor;
+public int priority;
+public int stageId;
